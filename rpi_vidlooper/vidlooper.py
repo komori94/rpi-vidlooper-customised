@@ -140,6 +140,11 @@ class VidLooper(object):
                                 stdout=None if self.debug else PIPE,
                                 preexec_fn=os.setsid)
                 self._active_vid = filename
+            # if the button get pressed a second time, the video will end
+            elif filename == self._active_vid:
+                self._active_vid = None
+                self._kill_process()
+                
 
     @property
     def in_pins(self):
