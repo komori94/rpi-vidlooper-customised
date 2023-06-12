@@ -142,6 +142,10 @@ class VidLooper(object):
                 self._active_vid = filename
             # if the button get pressed a second time, the video will end
             elif filename == self._active_vid:
+                # reset all led outputs to low
+                for in_pin, out_pin in self.gpio_pins.items():
+                    if out_pin is not None:
+                        GPIO.output(out_pin, GPIO.LOW)
                 self._active_vid = None
                 self._kill_process()
                 
